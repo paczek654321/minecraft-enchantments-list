@@ -76,6 +76,11 @@ document.addEventListener('DOMContentLoaded', function()
 			this.innerHTML += "<br />"
 		}
 	} customElements.define("enchantment-list-group", EnchantmentListGroup)
+
+	for (let item of Object.keys(items))
+	{
+		document.querySelector("dialog select").innerHTML += `<option>${item}</option>`
+	}
 })
 
 
@@ -108,4 +113,54 @@ function select()
 {
 	document.getElementsByTagName("textarea")[0].select();
     document.execCommand('copy');
+}
+
+function item_popup()
+{
+	document.getElementsByTagName("dialog")[0].open = true
+}
+
+function item_chosen()
+{
+	document.getElementsByTagName("dialog")[0].open = false
+	create_item(document.querySelector("dialog select").value)
+	document.querySelector("dialog select option").selected = true
+}
+
+function remove(target)
+{
+	target.parentElement.parentElement.remove()
+}
+
+let items =
+{
+	"Helmet": "_Iron",
+	"Chestplate": "_Iron",
+	"Leggings": "_Iron",
+	"Boots": "_Iron",
+	"Sword": "_Iron",
+	"Axe": "_Iron",
+	"Pickaxe": "_Iron",
+	"Shovel": "_Iron",
+	"Hoe": "_Iron",
+	"Elytra": "",
+	"Shield": "",
+	"Bow": "",
+	"Crossbow": "",
+	"Trident": "",
+	"Shears": "",
+	"Flint and Steel": "",
+}
+
+function create_item(item)
+{
+	let element = document.createElement("div")
+	element.innerHTML = `
+	<h3>
+		<img src="https://minecraft.wiki/images/Invicon${items[item]}_${item.replaceAll(" ", "_")}.png" />
+		${item}
+		<button onclick="remove(this)">remove</button>
+	</h3>` + document.getElementById(item).innerHTML
+	
+	document.getElementById("item-container").append(element)
 }
