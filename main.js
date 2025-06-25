@@ -101,5 +101,11 @@ function generate()
 	{
 		if (enchantment.checked && document.getElementById(`group_list_radio_${enchantment.name}`).checked) { increment(enchantment.value) }
 	}
-	document.body.innerHTML = Object.entries(enchantments).map(([key, value])=>`${key}: ${value}`).join(`<br />`)
+	document.getElementsByTagName("textarea")[0].innerHTML = Object.entries(enchantments).map(([key, value])=>`${key}: ${value}`).join(`\n`)
+}
+
+function select()
+{
+	document.getElementsByTagName("textarea")[0].select();
+    document.execCommand('copy');
 }

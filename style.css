@@ -28,9 +28,20 @@ div:has(>h3)
 	display: inline-block;
 	vertical-align: top;
 }
-button
+center
 {
 	display: block;
+}
+button
+{
+	margin: 10px;
+	color: gray;
+	background-color: rgb(32, 32, 32);
+}
+textarea
+{
+	field-sizing: content;
+	width: 100%;
 	color: gray;
 	background-color: rgb(32, 32, 32);
 }
