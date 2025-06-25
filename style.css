@@ -21,6 +21,13 @@ img
 	height: 25px;
 	vertical-align: bottom;
 }
+img.github
+{
+	margin-top: 3px;
+	vertical-align: top;
+	mix-blend-mode: multiply;
+	height: 30px;
+}
 div:has(>h3)
 {
 	padding: 4px;
