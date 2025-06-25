@@ -59,7 +59,7 @@ function generate()
 			}
 			else
 			{
-				enchantments[enchantment.value] = (enchantments[enchantment.value] ? enchantments[enchantment.value] : 0) + 1
+				enchantments[enchantment.value] = (enchantments[enchantment.value] ?? 0) + 1
 			}
 		}
 	}
@@ -72,7 +72,7 @@ function generate()
 				enchantments[enchantment.value] = 1
 				continue
 			}
-			enchantments[enchantment.value] = (enchantments[enchantment.value] ? enchantments[enchantment.value] : 0) + 1
+			enchantments[enchantment.value] = (enchantments[enchantment.value] ?? 0) + 1
 		}
 	}
 	document.body.innerHTML = Object.entries(enchantments).map(([key, value])=>`${key}: ${value}`).join(`<br />`)
