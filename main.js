@@ -1,3 +1,7 @@
+window.onbeforeunload = function() {
+  return "Data will be lost if you leave the page, are you sure?";
+};
+
 document.addEventListener('DOMContentLoaded', function()
 {
 	class CommonList extends HTMLElement
