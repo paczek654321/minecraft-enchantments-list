@@ -55,3 +55,11 @@ dialog
 	padding: 40px;
 	border-left: 2px solid gray;
 }
+#js
+{
+	top: 0;
+	padding: 0;
+	border: none;
+	width: 100%;
+	height: 100%;
+}

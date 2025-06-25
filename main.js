@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function()
 	{
 		document.querySelector("dialog select").innerHTML += `<option>${item}</option>`
 	}
+	document.getElementById("js").remove()
 })
 
 
