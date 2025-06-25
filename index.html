@@ -129,14 +129,22 @@
 
 	<h1>
 		Minecraft Enchantments List Generator | 1.19.4
-		<a href="https://github.com/paczek654321/minecraft-enchantments-list">
-			<img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" class="github" />
-		</a>
+		<a href="https://github.com/paczek654321/minecraft-enchantments-list"><img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" class="github" /></a>
 	</h1>
 
 	<div id="item-container"></div>
-	<dialog><h3>Add item</h3><select oninput="item_chosen()"><option disabled selected>---</option></select></dialog>
-	<center><button onclick="generate()"><h2>Generate</h2></button><button onclick="select()"><h2>Copy</h2></button><button onclick="item_popup()"><h2>Add item</h2></button></center>
+	<dialog>
+		<h3>Add item</h3>
+		<select oninput="item_chosen()">
+			<option disabled selected>---</option>
+		</select>
+	</dialog>
+	
+	<center>
+		<button onclick="generate()"><h2>Generate</h2></button>
+		<button onclick="select()"><h2>Copy</h2></button>
+		<button onclick="item_popup()"><h2>Add item</h2></button>
+	</center>
 	<textarea spellcheck="false"></textarea>
 </body>
 </html>
