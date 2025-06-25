@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function()
 			let name = Math.random().toString(36).substring(2, 18)
 			let list = this.innerHTML.trim().split(";")
 			if (list[list.length-1].trim() == "") {list.pop()}
-			this.innerHTML = `<input type="checkbox" value="${name}" checked />`
+			this.innerHTML = `<input type="checkbox" id="group_checkobx_${name}" checked />`
 			for (let i in list)
 			{
 				list[i] = list[i].trim()
@@ -44,36 +44,62 @@ document.addEventListener('DOMContentLoaded', function()
 			this.innerHTML += "<br />"
 		}
 	} customElements.define("enchantment-group", EnchantmentGroup)
+	
+	class EnchantmentListGroup extends HTMLElement
+	{
+		constructor()
+		{
+			super()
+		}
+		connectedCallback()
+		{
+			let name = Math.random().toString(36).substring(2, 18)
+
+			let list = this.innerHTML.trim().split(";")
+			if (list[list.length-1].trim() == "") {list.pop()}
+
+			let group = 0
+			this.innerHTML = `<input type="radio" name="${name}" id="group_list_radio_${name}_0" checked />`
+			
+			for (let i in list)
+			{
+				list[i] = list[i].trim()
+				if (list[i] == "-")
+				{
+					group++
+					this.innerHTML += `<br /><input type="radio" name="${name}" id="group_list_radio_${name}_${group}" />`
+					continue
+				}
+				this.innerHTML += `<input type="checkbox" value="${list[i]}" name="${name}_${group}" checked />${list[i]}`
+			}
+
+			this.innerHTML += "<br />"
+		}
+	} customElements.define("enchantment-list-group", EnchantmentListGroup)
 })
+
+
 function generate()
 {
-	let checked_groups = []
 	let enchantments = {}
-	for (let enchantment of document.querySelectorAll("input[type='checkbox']"))
+	function increment(name)
 	{
-		if (enchantment.checked)
-		{
-			if (enchantment.parentElement.localName === "enchantment-group")
-			{
-				checked_groups.push(enchantment.value)
-			}
-			else
-			{
-				enchantments[enchantment.value] = (enchantments[enchantment.value] ?? 0) + 1
-			}
-		}
+		enchantments[name] = (enchantments[name] ?? 0) + 1
 	}
-	for (let enchantment of document.querySelectorAll("input[type='radio']"))
+
+	for (let enchantment of document.querySelectorAll("enchantment-label input[type='checkbox']"))
 	{
-		if (checked_groups.includes(enchantment.name) && enchantment.checked)
-		{
-			if (enchantment.value == "Riptide III")
-			{
-				enchantments[enchantment.value] = 1
-				continue
-			}
-			enchantments[enchantment.value] = (enchantments[enchantment.value] ?? 0) + 1
-		}
+		if (enchantment.checked) { increment(enchantment.value) }
+	}
+
+	for (let enchantment of document.querySelectorAll("enchantment-group input[type='radio']"))
+	{
+		if (enchantment.checked && document.getElementById(`group_checkobx_${enchantment.name}`).checked) { increment(enchantment.value) }
+	}
+
+	for (let enchantment of document.querySelectorAll("enchantment-list-group input[type='checkbox']"))
+	{
+		if (enchantment.checked && document.getElementById(`group_list_radio_${enchantment.name}`).checked) { increment(enchantment.value) }
 	}
 	document.body.innerHTML = Object.entries(enchantments).map(([key, value])=>`${key}: ${value}`).join(`<br />`)
 }
